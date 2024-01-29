@@ -10,7 +10,7 @@ import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleEl
  * Make a numeric modification to an arbitrary property in a similar way as `ActiveEffect`s
  * @category RuleElement
  */
-class AELikeRuleElement<TSchema extends AELikeSchema> extends RuleElementPF2e<TSchema> {
+class AELikeRuleElement<TSchema extends AELikeSchema = AELikeSchema> extends RuleElementPF2e<TSchema> {
     static override defineSchema(): AELikeSchema {
         const { fields } = foundry.data;
 
@@ -25,15 +25,32 @@ class AELikeRuleElement<TSchema extends AELikeSchema> extends RuleElementPF2e<TS
                 choices: R.keys.strict(this.CHANGE_MODE_DEFAULT_PRIORITIES),
                 initial: undefined,
             }),
-            path: new fields.StringField({ required: true, nullable: false, blank: false, initial: undefined }),
+            path: new fields.StringField({
+                required: true,
+                nullable: false,
+                blank: false,
+                initial: undefined,
+                label: "PF2E.RuleEditor.ActiveEffectLike.Path",
+            }),
             phase: new fields.StringField({
                 required: false,
                 nullable: false,
                 choices: fu.deepClone(this.PHASES),
                 initial: "applyAEs",
+                label: "PF2E.RuleEditor.General.Phase",
             }),
-            value: new ResolvableValueField({ required: true, nullable: true, initial: undefined }),
-            merge: new fields.BooleanField({ required: false, nullable: false, initial: undefined }),
+            value: new ResolvableValueField({
+                required: true,
+                nullable: true,
+                initial: undefined,
+                label: "PF2E.RuleEditor.General.Value",
+            }),
+            merge: new fields.BooleanField({
+                required: false,
+                nullable: false,
+                initial: undefined,
+                label: "PF2E.RuleEditor.ActiveEffectLike.Merge",
+            }),
         };
     }
 
@@ -280,6 +297,7 @@ interface AELikeSource extends RuleElementSource {
     mode?: JSONValue;
     path?: JSONValue;
     phase?: JSONValue;
+    merge?: unknown;
 }
 
 export { AELikeRuleElement };

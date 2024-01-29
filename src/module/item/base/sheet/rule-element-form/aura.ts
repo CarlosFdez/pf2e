@@ -53,7 +53,7 @@ class AuraForm extends RuleElementForm<AuraRuleElementSource, AuraRuleElement> {
 
         for (const button of htmlQueryAll<HTMLButtonElement>(
             html,
-            "div[data-rule-tab=effects] button[data-action=toggle-brackets]",
+            "div[data-rule-tab=effects] button[data-action=toggle-resolvable-mode]",
         )) {
             const fieldset = htmlClosest(button, "fieldset");
             const select = htmlQuery<HTMLSelectElement>(fieldset, "select");

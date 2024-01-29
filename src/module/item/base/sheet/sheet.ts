@@ -69,8 +69,8 @@ class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem, ItemSheetOp
         };
     }
 
-    /** Maintain selected rule element at the sheet level (do not persist) */
-    #selectedRuleElementType: string | null = Object.keys(RuleElements.all).at(0) ?? null;
+    /** Maintain selected rule element at the sheet level (not persisted) */
+    #selectedRuleElementType: string = "";
 
     /** If we are currently editing an RE, this is the index */
     #editingRuleElementIndex: number | null = null;
@@ -333,7 +333,7 @@ class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem, ItemSheetOp
             anchor.addEventListener("click", async (event) => {
                 await this._onSubmit(event); // Submit any unsaved changes
                 const rulesData = this.item.toObject().system.rules;
-                const key = this.#selectedRuleElementType ?? "NewRuleElement";
+                const key = this.#selectedRuleElementType || "NewRuleElement";
                 this.item.update({ "system.rules": rulesData.concat({ key }) });
             });
         }

@@ -144,16 +144,24 @@ class RuleElementForm<
 
         const getResolvableData = (property: string) => {
             const value = fu.getProperty(rule, property);
-            const mode = isBracketedValue(value) ? "brackets" : isObject(value) ? "object" : "primitive";
+            const mode = isBracketedValue(value)
+                ? "brackets"
+                : isObject(value) || typeof value === "boolean"
+                  ? "object"
+                  : "primitive";
             return { value, mode, property, path: `${this.basePath}.${property}` };
         };
 
         return {
-            resolvableValue: (property: string, options: { hash?: { fileInput?: boolean } } = {}) =>
+            resolvableValue: (
+                property: string,
+                options: { hash?: { fileInput?: boolean; includeObject?: boolean } } = {},
+            ) =>
                 valueTemplate({
                     ...getResolvableData(property),
                     inputId: `${this.fieldIdPrefix}${property}`,
                     fileInput: options.hash?.fileInput ?? false,
+                    includeObject: options.hash?.includeObject ?? false,
                 }),
 
             resolvableAddBracket: (property: string) => {
@@ -214,13 +222,22 @@ class RuleElementForm<
             }
         });
 
-        for (const button of htmlQueryAll(html, "[data-action=toggle-brackets]")) {
+        for (const button of htmlQueryAll(html, "[data-action=change-resolvable-type]")) {
             button.addEventListener("click", () => {
+                const includeObject = "includeObject" in button.dataset;
                 const property = button.dataset.property ?? "value";
                 const value = fu.getProperty(this.rule, property);
-                if (isBracketedValue(value)) {
+                if (isBracketedValue(value) && includeObject) {
+                    // Convert to object mode
+                    fu.setProperty(this.rule, property, {});
+                    const rules: Record<string, unknown>[] = this.item.toObject().system.rules;
+                    rules[this.index] = this.rule;
+                    this.item.update({ [`system.rules`]: rules });
+                } else if (R.isObject(value)) {
+                    // Convert to primitive value mode
                     this.updateItem({ [property]: "" });
                 } else {
+                    // Convert to brackets mode
                     this.updateItem({ [property]: { brackets: [{ value: "" }] } });
                 }
             });

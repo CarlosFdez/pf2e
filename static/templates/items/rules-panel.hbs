@@ -50,6 +50,7 @@
         <div class="create-rule-element">
             <select data-action="select-rule-element">
                 {{#select rules.selection.selected}}
+                    <option></option>
                     {{#each rules.selection.types as |value key|}}
                         <option value="{{key}}">{{value}}</option>
                     {{/each}}

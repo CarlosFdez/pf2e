@@ -1,0 +1,42 @@
+<div class="form-group">
+    <label for="{{fieldIdPrefix}}path" class="short">{{localize fields.path.label}}</label>
+    <div class="form-fields">
+        <input type="text" name="{{basePath}}.path" id="{{fieldIdPrefix}}path" value="{{rule.path}} "/>
+        <label>
+            <span>{{localize fields.phase.label}}</span>
+            <select name="{{basePath}}.phase">
+                {{#select rule.phase}}
+                    {{#each fields.phase.choices as |phase|}}
+                        <option value="{{phase}}">{{phase}}</option>
+                    {{/each}}
+                {{/select}}
+            </select>
+        </label>
+    </div>
+</div>
+<div class="form-group">
+    <label for="{{fieldIdPrefix}}value" class="short">{{localize fields.value.label}}</label>
+    <div class="form-fields">
+        {{{form.resolvableValue "value" includeObject=true}}}
+        <select name="{{basePath}}.mode" class="short">
+            {{#select rule.mode}}
+                <option></option>
+                {{#each fields.mode.choices as |mode|}}
+                    <option value="{{mode}}">{{mode}}</option>
+                {{/each}}
+            {{/select}}
+        </select>
+        {{#if canMerge}}
+            <label>
+                {{localize fields.merge.label}}
+                <input type="checkbox" name="{{basePath}}.merge" {{checked rule.merge}}/>
+            </label>
+        {{/if}}
+        {{{form.resolvableAddBracket "value"}}}
+    </div>
+</div>
+{{{form.resolvableBrackets "value"}}}
+<div class="form-group">
+    <label for="{{fieldIdPrefix}}predicate" class="short">{{localize fields.predicate.label}}</label>
+    <input type="text" name="{{basePath}}.predicate" id="{{fieldIdPrefix}}predicate" value="{{json rule.predicate}}" placeholder="[ ]" />
+</div>
