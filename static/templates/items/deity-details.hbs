@@ -12,8 +12,15 @@
         <p class="hint">{{localize "PF2E.Item.Deity.Category.Hint"}}</p>
     </div>
 
-    {{!-- Divine Sanctification --}}
     {{#unless (eq item.category "philosophy")}}
+        {{!-- Divine Attribute --}}
+        <div class="form-group form-group-trait">
+            <label>{{localize "PF2E.Item.Deity.DivineAttribute.Label"}}</label>
+            <input type="text" name="system.attribute" value="{{json data.attribute}}" class="pf2e-tagify" data-dtype="JSON" />
+            <p class="hint">{{localize "PF2E.Item.Deity.DivineAttribute.Hint"}}</p>
+        </div>
+
+        {{!-- Divine Sanctification --}}
         <div class="form-group">
             <label for="{{fieldIdPrefix}}sanctification">{{localize "PF2E.Item.Deity.Sanctification.Label"}}</label>
             <select name="system.sanctification" id="{{fieldIdPrefix}}sanctification" data-dtype="JSON">
@@ -23,13 +30,6 @@
                     {{/each}}
                 {{/select}}
             </select>
-        </div>
-
-        {{!-- Divine Attribute --}}
-        <div class="form-group form-group-trait">
-            <label>{{localize "PF2E.Item.Deity.DivineAttribute.Label"}}</label>
-            <input type="text" name="system.attribute" value="{{json data.attribute}}" class="pf2e-tagify" data-dtype="JSON" />
-            <p class="hint">{{localize "PF2E.Item.Deity.DivineAttribute.Hint"}}</p>
         </div>
 
         {{!-- Divine Skill --}}
