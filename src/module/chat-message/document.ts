@@ -222,11 +222,14 @@ class ChatMessagePF2e extends ChatMessage {
             image.inert = true;
             image.style.transform = `scale(${scale})`;
 
-            // If image scale is above 1.2, we might need to add a radial fade to not block out the name
-            if (scale > 1.2) {
-                const ringPercent = 100 - Math.floor(((scale - 0.7) / scale) * 100);
-                const limitPercent = 100 - Math.floor(((scale - 1.15) / scale) * 100);
-                image.style.maskImage = `radial-gradient(circle at center, black ${ringPercent}%, rgba(0, 0, 0, 0.2) ${limitPercent}%)`;
+            // Add a fade starting from scale 1 that fades almost entirely around 1.8
+            const FADE_START = 1;
+            const FADE_END = 1.8;
+            if (scale > FADE_START) {
+                const ringPercent = 100 - Math.floor(((scale - FADE_START) / scale) * 100);
+                const limitPercent = 100 - Math.floor(((scale - FADE_END) / scale) * 100);
+                const offset = Math.floor((100 - ((scale - 0.2) / scale) * 100) / 2);
+                image.style.maskImage = `radial-gradient(circle at ${50 - offset}% 50%, black ${ringPercent}%, rgba(0, 0, 0, 0.2) ${limitPercent}%)`;
             }
 
             const usedToken = imageUrl === token.texture.src;
