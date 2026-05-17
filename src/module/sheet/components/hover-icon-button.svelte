@@ -17,11 +17,9 @@
 <style>
     /** Increase specificity until layer support */
     button.flat {
-        --image-size: 2rem;
-
         position: relative;
-        width: var(--image-size);
-        height: var(--image-size);
+        width: var(--image-size, 2rem);
+        height: var(--image-size, 2rem);
 
         img {
             border: none;

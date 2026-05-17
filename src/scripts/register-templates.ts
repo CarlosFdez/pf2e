@@ -119,10 +119,6 @@ export function registerTemplates(): void {
         "items/partials/other-tags.hbs",
         "items/partials/self-applied-effect.hbs",
 
-        // Loot partials
-        "actors/loot/inventory.hbs",
-        "actors/loot/sidebar.hbs",
-
         // Vehicle partials
         "actors/vehicle/vehicle-header.hbs",
         "actors/vehicle/sidebar.hbs",

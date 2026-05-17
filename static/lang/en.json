@@ -627,8 +627,8 @@
                 "Search": "Search Inventory",
                 "TotalBulk": "Total Bulk: {bulk}",
                 "UnitTitle": {
-                    "Bulk": "Unit Bulk",
-                    "Price": "Price"
+                    "Price": "Price",
+                    "Quantity": "Stock"
                 }
             },
             "IWREditor": {
@@ -636,6 +636,12 @@
                 "Exceptions": "Exceptions",
                 "Title": "{actor}: {category}",
                 "Type": "Type"
+            },
+            "Loot": {
+                "HiddenWhenEmpty": {
+                    "Hint": "Hide this actor's token(s) when its inventory is empty.",
+                    "Label": "Hidden When Empty"
+                }
             },
             "Speed": {
                 "BaseLabel": "{value}-Foot {type} Speed",
@@ -7125,10 +7131,6 @@
             "EditLootLabel": "Configure Loot?",
             "GMSupervisionError": "A GM must be online in order to interact with {loot}.",
             "GiveMessage": "{giver} gives {quantity} × {item} to {recipient}.",
-            "HiddenWhenEmpty": {
-                "Hint": "Hide this actor's token(s) when its inventory is empty.",
-                "Label": "Hidden When Empty"
-            },
             "InsufficientCurrencyError": "Insufficient currency for purchase by {buyer}",
             "InsufficientFundsMessage": "{buyer} reaches for their coins but comes up short!",
             "LootDescription": "Allows for distribution of coins across players",

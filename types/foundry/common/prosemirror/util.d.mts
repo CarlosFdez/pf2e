@@ -1,4 +1,4 @@
-import { Schema, Slice } from "prosemirror-model";
+import { Fragment, Schema, Slice } from "prosemirror-model";
 import { ProseMirrorSliceTransformer } from "./_types.mjs";
 
 /**
@@ -21,7 +21,7 @@ export function parseHTMLString(htmlString: string, schema?: Schema): Node;
  * @param options.schema The ProseMirror schema to use instead of the default one.
  * @param options.spaces The number of spaces to use for indentation. See {@link StringNode#toString} for details.
  */
-export function serializeHTMLString(doc: Node, options?: { schema?: Schema; spaces?: string | number }): string;
+export function serializeHTMLString(doc: Fragment, options?: { schema?: Schema; spaces?: string | number }): string;
 
 /**
  * Apply a transformation to some nodes in a slice, and return the new slice.

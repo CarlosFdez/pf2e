@@ -40,7 +40,7 @@
 {#if open && chatData}
     <div class="item-summary" transition:slide={{ duration: 500 }}>
         {#if identified}
-            {#if !exclude.includes("traits")}
+            {#if chatData.traits?.length && !exclude.includes("traits")}
                 <ItemTraits
                     rarity={chatData.rarity?.slug}
                     traits={chatData.traits ?? []}
@@ -97,7 +97,7 @@
         :global {
             @include mixins.journal-styling;
             > .tags {
-                margin: 0.5em 0.05em 0.2em calc(-1 * var(--space-2));
+                margin: var(--space-2) 0.05em 0.2em calc(-1 * var(--space-2));
                 padding: 0;
             }
 

@@ -1,6 +1,6 @@
 @import "iwr-editor";
 
-.actor.sheet section.window-content {
+.actor.sheet:where(.app) section.window-content {
     font-family: var(--sans-serif);
     overflow: hidden;
     padding: 0;
